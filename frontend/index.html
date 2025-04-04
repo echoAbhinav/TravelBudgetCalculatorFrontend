@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Budget Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-globe-americas"></i>
+            <span>TravelBudget</span>
+        </div>
+        <div class="nav-links">
+            <button id="currency-btn" class="nav-btn">
+                <i class="fas fa-dollar-sign"></i>
+                <span>USD</span>
+            </button>
+            <button id="theme-toggle" class="nav-btn">
+                <i class="fas fa-moon"></i>
+                <span>Dark Mode</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="popup">
+        <div class="chat-widget">
+            <button id="chat-toggle" class="chat-toggle">
+                <div class="toggle-content">
+                    <div class="pulse-ring"></div>
+                    <i class="fas fa-robot"></i>
+                    <!-- <span class="notification-badge">1</span> -->
+                </div>
+            </button>
+    
+            <div id="chat-container" class="chat-container">
+                <div class="chat-header">
+                    <div class="bot-info">
+                        <div class="bot-avatar">
+                            <i class="fas fa-robot"></i>
+                            <div class="status-dot"></div>
+                        </div>
+                        <div class="bot-details">
+                            <div class="bot-name">Travelling and Expenses Assistant</div>
+                            <div class="status">
+                                <span class="status-text">Online</span>
+                                <span class="typing-status">Typing...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button id="minimize-btn" title="Minimize Chat">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+    
+                <div class="chat-body">
+                    <div id="chat-messages" class="chat-messages">
+                        <div class="message bot-message" data-time="Just now">
+                            <div class="welcome-header">
+                                <i class="fas fa-shopping-cart"></i>
+                                <h2>Welcome to our Chatbot!</h2>
+                            </div>
+                            <p>I'm your AI assistant. I can help you with:</p>
+                            <ul>
+                                <li>🌍 Destination Recommendations</li>
+                                <li>✈️ Flight Bookings</li>
+                                <li>🏨 Hotel Reservations</li>
+                                <li>🗺️ Travel Itineraries</li>
+                                <li>💡 Travel Tips</li>
+                            </ul>
+                            <p>How can I assist you today?</p>
+                        </div>
+                    </div>
+    
+                    <div class="quick-actions">
+                        <button class="quick-action-btn" data-message="Recommend travel destinations">
+                            <i class="fas fa-globe"></i> Destinations
+                        </button>
+                        <button class="quick-action-btn" data-message="Find flights">
+                            <i class="fas fa-plane-departure"></i> Flights
+                        </button>
+                        <button class="quick-action-btn" data-message="Find hotels">
+                            <i class="fas fa-hotel"></i> Hotels
+                        </button>
+                        <button class="quick-action-btn" data-message="Travel tips and advice">
+                            <i class="fas fa-info-circle"></i> Travel Tips
+                        </button>
+                        <button class="quick-action-btn" data-message="Budget travel options">
+                            <i class="fas fa-piggy-bank"></i> Budget Travel
+                        </button>
+                    </div>
+    
+                    <div class="chat-input-container">
+                        <input type="text" id="user-input" placeholder="Type your message...">
+                        <button id="voice-btn" class="input-action-btn" title="Voice Input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button id="send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Travel Budget Calculator</h1>
+            <p>Plan your trip finances with ease</p>
+            <div class="header-illustration">
+                <i class="fas fa-globe-americas"></i>
+                <i class="fas fa-suitcase"></i>
+                <i class="fas fa-map-marked-alt"></i>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="calculator">
+                <i class="fas fa-calculator"></i> Calculator
+            </button>
+            <button class="tab-btn" data-tab="savings">
+                <i class="fas fa-piggy-bank"></i> Savings Tracker
+            </button>
+            <button class="tab-btn" data-tab="tips">
+                <i class="fas fa-lightbulb"></i> Travel Tips
+            </button>
+        </div>
+
+        <div class="tab-content active" id="calculator-tab">
+            <div class="main-content">
+                <div class="trip-info">
+                    <h2><i class="fas fa-info-circle"></i> Trip Details</h2>
+                    <div class="input-group">
+                        <label for="destination">Destination</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="destination" placeholder="Where are you going?">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="travelers">Number of Travelers</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-users"></i>
+                            <input type="number" id="travelers" min="1" value="1">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="duration">Duration (days)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="number" id="duration" min="1" value="7">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="travel-date">Travel Date</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-day"></i>
+                            <input type="date" id="travel-date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expenses">
+                    <h2><i class="fas fa-receipt"></i> Expenses</h2>
+                    
+                    <div class="expense-category">
+                        <h3><i class="fas fa-plane"></i> Transportation</h3>
+                        <div class="expense-item">
+                            <label for="flight">Flights</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="flight" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="expense-item">
+                            <label for="local-transport">Local Transportation</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="local-transport" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="expense-item">
+                            <label for="car-rental">Car Rental</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="car-rental" min="0" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expense-category">
+                        <h3><i class="fas fa-hotel"></i> Accommodation</h3>
+                        <div class="expense-item">
+                            <label for="hotel">Hotel/Airbnb</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="hotel" min="0" placeholder="0">
+                                <span class="per-night">per night</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expense-category">
+                        <h3><i class="fas fa-utensils"></i> Daily Expenses</h3>
+                        <div class="expense-item">
+                            <label for="food">Food & Drinks</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="food" min="0" placeholder="0">
+                                <span class="per-day">per day</span>
+                            </div>
+                        </div>
+                        <div class="expense-item">
+                            <label for="activities">Activities & Entertainment</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="activities" min="0" placeholder="0">
+                                <span class="per-day">per day</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expense-category">
+                        <h3><i class="fas fa-plus-circle"></i> Other Expenses</h3>
+                        <div class="expense-item">
+                            <label for="insurance">Travel Insurance</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="insurance" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="expense-item">
+                            <label for="shopping">Shopping</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="shopping" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="expense-item">
+                            <label for="misc">Miscellaneous</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="misc" min="0" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="calculate-btn"><i class="fas fa-calculator"></i> Calculate Budget</button>
+                    <button id="reset-btn"><i class="fas fa-redo"></i> Reset</button>
+                    <button id="save-btn"><i class="fas fa-save"></i> Save Trip</button>
+                </div>
+            </div>
+
+            <div class="results" id="results">
+                <h2><i class="fas fa-chart-pie"></i> Budget Summary</h2>
+                <div class="destination-display">
+                    <span id="destination-display">Your Trip</span>
+                    <span id="trip-details"></span>
+                </div>
+
+                <div class="summary-container">
+                    <div class="summary-chart">
+                        <canvas id="expense-chart"></canvas>
+                    </div>
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <span class="summary-label"><i class="fas fa-plane"></i> Transportation</span>
+                            <span class="summary-value" id="transport-total">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label"><i class="fas fa-hotel"></i> Accommodation</span>
+                            <span class="summary-value" id="accommodation-total">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label"><i class="fas fa-utensils"></i> Food & Drinks</span>
+                            <span class="summary-value" id="food-total">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label"><i class="fas fa-ticket-alt"></i> Activities</span>
+                            <span class="summary-value" id="activities-total">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label"><i class="fas fa-plus-circle"></i> Other Expenses</span>
+                            <span class="summary-value" id="other-total">$0</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span class="summary-label"><i class="fas fa-money-bill-wave"></i> Total Budget</span>
+                            <span class="summary-value" id="grand-total">$0</span>
+                        </div>
+                        <div class="summary-item per-person">
+                            <span class="summary-label"><i class="fas fa-user"></i> Per Person</span>
+                            <span class="summary-value" id="per-person">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="export-options">
+                    <button id="export-pdf"><i class="fas fa-file-pdf"></i> Export as PDF</button>
+                    <button id="share-btn"><i class="fas fa-share-alt"></i> Share</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="savings-tab">
+            <div class="savings-tracker">
+                <h2><i class="fas fa-piggy-bank"></i> Trip Savings Tracker</h2>
+                
+                <div class="savings-goal">
+                    <div class="input-group">
+                        <label for="savings-target">Savings Target</label>
+                        <div class="input-with-icon">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="savings-target" min="0" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="current-savings">Current Savings</label>
+                        <div class="input-with-icon">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="current-savings" min="0" placeholder="0">
+                        </div>
+                    </div>
+                    <button id="update-savings"><i class="fas fa-sync"></i> Update</button>
+                </div>
+                
+                <div class="savings-progress">
+                    <h3>Savings Progress</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="savings-progress-bar"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span id="savings-percentage">0%</span>
+                        <span id="savings-amount">$0 / $0</span>
+                    </div>
+                </div>
+                
+                <div class="savings-tips">
+                    <h3>Savings Tips</h3>
+                    <ul>
+                        <li>Set up automatic transfers to your travel fund</li>
+                        <li>Cut back on daily expenses like coffee or eating out</li>
+                        <li>Look for travel deals and discounts in advance</li>
+                        <li>Consider travel credit cards with rewards points</li>
+                    </ul>
+                </div>
+                
+                <div class="savings-timeline">
+                    <h3>Savings Timeline</h3>
+                    <div class="timeline-calculator">
+                        <div class="input-group">
+                            <label for="monthly-contribution">Monthly Contribution</label>
+                            <div class="input-with-icon">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="monthly-contribution" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <button id="calculate-timeline"><i class="fas fa-calculator"></i> Calculate</button>
+                    </div>
+                    <div class="timeline-result">
+                        <p>At this rate, you'll reach your goal in <span id="months-to-goal">0</span> months.</p>
+                        <p>Estimated completion date: <span id="goal-date">-</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tips-tab">
+            <div class="travel-tips">
+                <h2><i class="fas fa-lightbulb"></i> Travel Tips</h2>
+                
+                <div class="tips-search">
+                    <div class="input-with-icon">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="destination-search" placeholder="Search for a destination...">
+                    </div>
+                    <button id="search-tips"><i class="fas fa-search"></i> Search</button>
+                </div>
+                
+                <div class="tips-categories">
+                    <button class="tip-category active" data-category="all">All Tips</button>
+                    <button class="tip-category" data-category="budget">Budget</button>
+                    <button class="tip-category" data-category="accommodation">Accommodation</button>
+                    <button class="tip-category" data-category="transportation">Transportation</button>
+                    <button class="tip-category" data-category="food">Food</button>
+                </div>
+                
+                <div class="tips-container">
+                    <div class="tip-card" data-category="budget">
+                        <div class="tip-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <h3>Budget Wisely</h3>
+                        <p>Always add a 15-20% buffer to your budget for unexpected expenses that may arise during your trip.</p>
+                    </div>
+                    <div class="tip-card" data-category="accommodation">
+                        <div class="tip-icon"><i class="fas fa-hotel"></i></div>
+                        <h3>Accommodation Savings</h3>
+                        <p>Consider staying in hostels, guesthouses, or using services like Airbnb to save on accommodation costs.</p>
+                    </div>
+                    <div class="tip-card" data-category="transportation">
+                        <div class="tip-icon"><i class="fas fa-plane"></i></div>
+                        <h3>Flight Deals</h3>
+                        <p>Use flight comparison tools and set up price alerts to catch the best deals. Booking 2-3 months in advance often yields the best prices.</p>
+                    </div>
+                    <div class="tip-card" data-category="food">
+                        <div class="tip-icon"><i class="fas fa-utensils"></i></div>
+                        <h3>Food Expenses</h3>
+                        <p>Eat like a local! Street food and local restaurants are not only more authentic but usually much cheaper than tourist spots.</p>
+                    </div>
+                    <div class="tip-card" data-category="budget">
+                        <div class="tip-icon"><i class="fas fa-credit-card"></i></div>
+                        <h3>Currency Exchange</h3>
+                        <p>Avoid exchanging currency at airports or hotels. Use local ATMs or exchange offices in the city center for better rates.</p>
+                    </div>
+                    <div class="tip-card" data-category="transportation">
+                        <div class="tip-icon"><i class="fas fa-subway"></i></div>
+                        <h3>Local Transport</h3>
+                        <p>Research public transportation options before your trip. Many cities offer tourist passes that can save you money on multiple rides.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="currency-modal" id="currency-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Currency</h2>
+                <button id="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="currency-list">
+                <button class="currency-option" data-currency="USD" data-symbol="$">USD - US Dollar ($)</button>
+                <button class="currency-option" data-currency="EUR" data-symbol="€">EUR - Euro (€)</button>
+                <button class="currency-option" data-currency="GBP" data-symbol="£">GBP - British Pound (£)</button>
+                <button class="currency-option" data-currency="JPY" data-symbol="¥">JPY - Japanese Yen (¥)</button>
+                <button class="currency-option" data-currency="CAD" data-symbol="$">CAD - Canadian Dollar ($)</button>
+                <button class="currency-option" data-currency="AUD" data-symbol="$">AUD - Australian Dollar ($)</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TravelBudget</h3>
+                <p>Plan your trip finances with ease</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" class="tab-link" data-tab="calculator">Calculator</a></li>
+                    <li><a href="#" class="tab-link" data-tab="savings">Savings Tracker</a></li>
+                    <li><a href="#" class="tab-link" data-tab="tips">Travel Tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Travel Budget Calculator &copy; 2025 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script src="chat.js"></script>
+
+</body>
+</html>

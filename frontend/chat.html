@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant</title>
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-widget">
+        <button id="chat-toggle" class="chat-toggle">
+            <div class="toggle-content">
+                <div class="pulse-ring"></div>
+                <i class="fas fa-robot"></i>
+            </div>
+        </button>
+
+        <div id="chat-container" class="chat-container">
+            <div class="chat-header">
+                <div class="bot-info">
+                    <div class="bot-avatar">
+                        <i class="fas fa-robot"></i>
+                        <div class="status-dot"></div>
+                    </div>
+                    <div class="bot-details">
+                        <div class="bot-name">travelling and Expenses Assistant</div>
+                        <div class="status">
+                            <span class="status-text">Online</span>
+                            <span class="typing-status">Typing...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button id="minimize-btn" title="Minimize Chat">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-body">
+                <div id="chat-messages" class="chat-messages">
+                    <div class="message bot-message" data-time="Just now">
+                        <div class="welcome-header">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h2>Welcome to our Chatbot!</h2>
+                        </div>
+                        <p>I'm your AI assistant. I can help you with:</p>
+                        <ul>
+                            <li>🌍 Destination Recommendations</li>
+                            <li>✈️ Flight Bookings</li>
+                            <li>🏨 Hotel Reservations</li>
+                            <li>🗺️ Travel Itineraries</li>
+                            <li>💡 Travel Tips</li>
+                        </ul>
+                        <p>How can I assist you today?</p>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="quick-action-btn" data-message="Recommend travel destinations">
+                        <i class="fas fa-globe"></i> Destinations
+                    </button>
+                    <button class="quick-action-btn" data-message="Find flights">
+                        <i class="fas fa-plane-departure"></i> Flights
+                    </button>
+                    <button class="quick-action-btn" data-message="Find hotels">
+                        <i class="fas fa-hotel"></i> Hotels
+                    </button>
+                    <button class="quick-action-btn" data-message="Travel tips and advice">
+                        <i class="fas fa-info-circle"></i> Travel Tips
+                    </button>
+                    <button class="quick-action-btn" data-message="Budget travel options">
+                        <i class="fas fa-piggy-bank"></i> Budget Travel
+                    </button>
+                </div>
+
+                <div class="chat-input-container">
+                    <input type="text" id="user-input" placeholder="Type your message...">
+                    <button id="voice-btn" class="input-action-btn" title="Voice Input">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        async function sendMessage() {
+            const userMessage = document.getElementById('userMessage').value;
+            const responseDiv = document.getElementById('chatResponse');
+
+            if (!userMessage) {
+                responseDiv.innerHTML = "Please enter a message.";
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userMessage }),
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    responseDiv.innerHTML = `<p><strong>AI:</strong> ${data.message}</p>`;
+                } else {
+                    responseDiv.innerHTML = `<p><strong>Error:</strong> ${data.error}</p>`;
+                }
+            } catch (error) {
+                responseDiv.innerHTML = `<p><strong>Error:</strong> Unable to connect to the server.</p>`;
+            }
+        }
+    </script> -->
+
+    <script src="chat.js"></script>
+</body>
+</html>
