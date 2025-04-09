@@ -24,8 +24,9 @@ FrontendAi is a project designed to streamline frontend development with AI-powe
    --- pip install -r requirements.txt
    ```
 
-         Running the Backend
+        --- Running the Backend
          1. Navigate to the backend directory:
                cd backend 
          2. Start the server:
                 python app.py
+         --- After that you can Go live 
