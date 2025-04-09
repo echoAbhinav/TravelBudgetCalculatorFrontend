@@ -1,6 +1,4 @@
 # TravelBudgetCalculator
-# FrontendAi
-
 ## Description
 FrontendAi is a project designed to streamline frontend development with AI-powered tools. This repository contains both the backend and frontend components of the application.
 
