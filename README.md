@@ -30,3 +30,7 @@ FrontendAi is a project designed to streamline frontend development with AI-powe
          2. Start the server:
                 python app.py
          --- After that you can Go live 
+
+
+![Web Screenshot](backend/assets/web.png)
+![Web Screenshot](backend/assets/web1.png)
